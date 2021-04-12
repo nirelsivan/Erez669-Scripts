@@ -1,6 +1,7 @@
 # this script was written by erez schwartz
 
 Import-Module ActiveDirectory
+
 while ($true){
 cls
 write-host "Change MobilePhone number on ActiveDirectory"
