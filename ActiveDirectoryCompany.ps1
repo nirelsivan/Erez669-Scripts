@@ -7,7 +7,7 @@ $AdminGroup = "Administrators"
 $Domain = "corp.supersol.co.il"
 $DomainCredential = Get-Credential "supersol\***adm"
 Set-ADUser -Identity $UserName -company $Computer -Credential $DomainCredential
-# ([ADSI]"WinNT://$Computer/$AdminGroup,group").psbase.Invoke("Add",([ADSI]"WinNT://$Domain/$UserName").path)
+([ADSI]"WinNT://$Computer/$AdminGroup,group").psbase.Invoke("Add",([ADSI]"WinNT://$Domain/$UserName").path)
 ([ADSI]"WinNT://$Computer/$LocalGroup,group").psbase.Invoke("Add",([ADSI]"WinNT://$Domain/$UserName").path)
 write-host "`n" # for creating space
 write-output "Operation Complete"
