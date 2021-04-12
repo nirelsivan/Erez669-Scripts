@@ -4,7 +4,7 @@ Import-Module activedirectory
 do {
 cls
 $User = Get-ADUser -Identity (Read-Host "Copy From Username")
-$Domain = "shufersal.co.il"
+$Domain = "mydomain.com"
 $NewUser = Read-Host "New Username"
 $userobj = Get-ADUser -LDAPFilter "(SAMAccountName=$NewUser)"
 write-host "`n" # for creating space
