@@ -4,11 +4,11 @@ Import-Module activedirectory
 do {
 cls
 $User = Get-ADUser -Identity (Read-Host "Copy From Username")
-$Domain = "mydomain.com"
+$Domain = "shufersal.co.il"
 $NewUser = Read-Host "New Username"
 $userobj = Get-ADUser -LDAPFilter "(SAMAccountName=$NewUser)"
 write-host "`n" # for creating space
-if ($userobj -ne $null -and $NewUser -ne "quit") {Write-Warning "$NewUser is already existing, please try again" ;Start-Sleep -s 04; continue} else {"$NewUser is Available for use"}
+if ($userobj -ne $null -or $NewUser -eq "quit") {Write-Warning "$NewUser is already existing, please try again" ;Start-Sleep -s 04; continue} else {"$NewUser is Available for use"}
 write-host "`n" # for creating space
 $FirstName = Read-Host "First Name (English)"
 $LastName = Read-Host "Last Name (English)"
@@ -17,7 +17,7 @@ $attribute12 = Read-Host "Last Name (Hebrew)"
 $newID = Read-Host 'Enter New User ID Number'
 $mobile = Read-Host 'Enter New User Mobile Number'
 $SapNumber = Read-Host 'Enter EmployeeID (Sap Number 6 Digits)'
-$attribute10 = Read-Host 'UserType (OutSource\Sapak) copy from brackets and click Enter'
+$attribute10 = Read-Host 'UserType (Shufersal\OutSource\Sapak) copy from brackets and click Enter'
 $upn = $NewUser + "@$Domain"
 $NewName = "$FirstName $LastName"
 $Info = Get-ADUser -Identity $User -Properties Title,Department,extensionattribute13
