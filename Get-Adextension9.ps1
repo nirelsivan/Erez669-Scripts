@@ -6,7 +6,7 @@ $ErrorActionPreference = 'SilentlyContinue'
 
 while ($true) {
 cls
-write-host "edit AD extensionAttribute9 IDnumber for Synerion"
+write-host "edit AD extensionAttribute9 IDnumber"
 write-host "`n" # for creating space
 $Username = Read-Host 'Enter AD UserName' # prompt user to input value
 write-host "`n" # for creating space
