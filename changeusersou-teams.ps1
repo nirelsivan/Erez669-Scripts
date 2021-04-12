@@ -1,5 +1,6 @@
 										# written by Erez Schwartz
-Set-Itemproperty -path HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell -name ExecutionPolicy -value ByPass # for shufersal network security
+										
+Set-Itemproperty -path HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell -name ExecutionPolicy -value ByPass
 
 $ErrorActionPreference = 'SilentlyContinue'
 
@@ -10,7 +11,7 @@ write-host "`n" # for creating space
 $Username = Read-Host 'Enter AD User' # prompt user to input value
 $cred = Get-Credential supersol\***adm
 $newou = "OU=Users-Office365,DC=corp,DC=supersol,DC=co,DC=il"
-Set-ADUser -Identity $Username -Replace @{userPrincipalName="$Username@shufersal.co.il"} # change upn suffix
+Set-ADUser -Identity $Username -Replace @{userPrincipalName="$Username@mydomain.com"} # change upn suffix
 $Groups = @("Office365_Lic_Default","Office365_Lic_Teams_Online","Office365 Required MFA")
 ForEach ($Group in $Groups) {Add-ADPrincipalGroupMembership $Username -MemberOf $Group} # add requested groups to the user
 Get-ADUser $Username | Move-ADObject -targetpath $newou # check the current AD object OU and moving it to the requested OU
