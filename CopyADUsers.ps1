@@ -5,7 +5,7 @@ do {
 cls
 $User = Get-ADUser -Identity (Read-Host "Copy From Username")
 $Domain = "mydomain.com"
-$NewUser = Read-Host "New Username"
+$NewUser = Read-Host "New Username (Logon Name)"
 $userobj = Get-ADUser -LDAPFilter "(SAMAccountName=$NewUser)"
 write-host "`n" # for creating space
 if ($userobj -ne $null -or $NewUser -eq "quit") {Write-Warning "$NewUser is already existing, please try again" ;Start-Sleep -s 04; continue} else {"$NewUser is Available for use"}
@@ -38,21 +38,34 @@ Set-ADUser -Identity $NewUser -replace @{extensionAttribute13 = "$attribute13"}
 # Create HomeDrive for the new account
 $homeShare = "\\fileserv01\data\$NewUser"
 $driveLetter = "V:"
+$detect = "supersol"
 New-Item $homeShare -Type Directory -Force
-
-# assign HomeDrive permissions
-$Acl = Get-Acl "$homeShare"
-$Permissions = New-Object System.Security.AccessControl.FileSystemAccessRule("$NewUser", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
-$Acl.SetAccessRule($Permissions)
-Set-Acl "$homeShare" $Acl
-write-host "`n" # for creating space
-write-host "Successfully added $NewUser full control permissions for HomeFolder"
 
 Set-ADUser -Identity $NewUser -HomeDrive $driveLetter -HomeDirectory $homeShare
 Set-ADUser -Identity $NewUser -ScriptPath "logonxp.bat"
 
+Start-Sleep -s 06 # delay command
+
+# assign HomeDrive permissions
+
+$FolderLocation = "$homeShare"
+$NewObject = "$detect\$NewUser"
+$acl = Get-Acl -Path $FolderLocation
+$giving = [System.Security.Principal.NTAccount]$NewObject
+$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($giving, "FullControl","ContainerInherit,ObjectInherit", "None", "Allow")
+$acl.AddAccessRule($AccessRule)
+set-acl -Path $FolderLocation -AclObject $acl
+
+write-host "`n" # for creating space
+write-host "Successfully added $NewUser full control permissions for HomeFolder"
+
 write-host "`n" # for creating space
 Write-Host "AD User $NewUser Creation Completed Successfully"
 
-Start-Sleep -s 06 # delay command
+Write-Host "This is a test..."
+
+write-host -nonewline "do you want to exit the script? (Y/N) "
+$response = read-host
+if ( $response -eq "Y" ) { break }
+
 } while ($NewUser -ne "quit")
