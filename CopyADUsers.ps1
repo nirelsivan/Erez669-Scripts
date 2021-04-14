@@ -62,8 +62,6 @@ write-host "Successfully added $NewUser full control permissions for HomeFolder"
 write-host "`n" # for creating space
 Write-Host "AD User $NewUser Creation Completed Successfully"
 
-Write-Host "This is a test..."
-
 write-host -nonewline "do you want to exit the script? (Y/N) "
 $response = read-host
 if ( $response -eq "Y" ) { break }
