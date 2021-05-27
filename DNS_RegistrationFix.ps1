@@ -4,5 +4,6 @@ $class.SetDNSSuffixSearchOrder(@('suffix1','suffix2'))
 $networkConfig.SetDynamicDNSRegistration($true,$true)
 wmic /interactive:off nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 1
 wmic /interactive:off nicconfig where TcpipNetbiosOptions=2 call SetTcpipNetbios 1
-ipconfig /flushdns
-ipconfig /registerdns
+Clear-DnsClientCache -Verbose
+Register-DnsClient -Verbose
+timeout /t 5
