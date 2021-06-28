@@ -1,4 +1,4 @@
-﻿while ($true) {
+while ($true) {
 cls
 write-host "Get Printer List from Printer Server"
 write-host "`n" # for creating space
