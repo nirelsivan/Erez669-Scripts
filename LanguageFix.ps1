@@ -26,5 +26,6 @@ REG ADD "HKU\DefaultUserTemplate\Keyboard Layout\Preload" /v "1" /t REG_SZ /d 00
 REG ADD "HKU\DefaultUserTemplate\Keyboard Layout\Preload" /v "2" /t REG_SZ /d 0000040d /f
 REG UNLOAD "HKU\DefaultUserTemplate"
 Write-Output "Successfully Changing the default keyboard layout"
-& $env:SystemRoot\System32\control.exe "intl.cpl,,/f:`"\\10.251.10.251\supergsrv\HdMatte\PowerShell\Lang.xml`""
-Invoke-Command {reg import "\\10.251.10.251\supergsrv\HdMatte\PowerShell\Default_Lang.reg"}
+& $env:SystemRoot\System32\control.exe "intl.cpl,,/f:`"C:\PS\Lang.xml`""
+Start-Sleep 05
+# Invoke-Command {reg import "C:\PS\Default_Lang.reg"}
