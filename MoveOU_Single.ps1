@@ -14,19 +14,21 @@ if ((Test-Admin) -eq $false)  {
     exit
 }
 
-# Retrieve DN of local computer.
-$env:COMPUTERNAME
-$SysInfo = New-Object -ComObject "ADSystemInfo"
-$ComputerDN = $SysInfo.GetType().InvokeMember("ComputerName", "GetProperty", $Null, $SysInfo, $Null)
+$CN = $env:COMPUTERNAME
+$root = [ADSI]''
+$searcher = New-Object System.DirectoryServices.DirectorySearcher($root)
+$searcher.filter = "(&(objectclass=computer)(cn= $CN))"
+$name = $searcher.findall() 
 
-# Bind to computer object in AD.
-$Computer = [ADSI]"LDAP://$ComputerDN"
+# Get the DN of the object
+$computerDN = $name.Properties.Item("DistinguishedName")
 
-# Specify target OU.
+# Connect to the computer object
+$Object = [ADSI]"LDAP://$ComputerDN"
+
+# Specify the target OU
 $TargetOU = "OU=Test,OU=MarlogRishon,OU=Workstations,DC=corp,DC=supersol,DC=co,DC=il"
+$TargetOU="LDAP://$TargetOU"
 
-# Bind to target OU.
-$OU = [ADSI]"LDAP://$TargetOU"
-
-# Move computer to target OU.
-$Computer.psbase.MoveTo($OU)
+# Move the object to the target OU
+$Object.psbase.MoveTo($TargetOU)
