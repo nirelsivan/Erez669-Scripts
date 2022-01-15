@@ -1,4 +1,4 @@
-# written by DHRUB BHARALI (https://powershellguru.com/)
+# written by DHRUB BHARALI and modified by erez schwartz (https://powershellguru.com/)
 
 Function Get-ComInfo {
 param(
