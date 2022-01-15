@@ -1,11 +1,10 @@
-										# written by Erez Schwartz
-										
-Set-Itemproperty -path HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell -name ExecutionPolicy -value ByPass
+							# written by Erez Schwartz										
+# Set-Itemproperty -path HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell -name ExecutionPolicy -value ByPass
 
 cls
 Write-Host "Set Permissions for Microsoft Teams, get userlist from .txt file"  # show message on the screen
 write-host "`n" # for creating space
-$cred = Get-Credential supersol\***adm
+$cred = Get-Credential mydomain\***adm
 $UserNames = get-content -path "\\myserver\PowerShell\TeamsUsers.txt"
 foreach ($user in $UserNames) {
 $newou = "OU=Users-Office365,DC=corp,DC=supersol,DC=co,DC=il"
