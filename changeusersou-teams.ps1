@@ -1,6 +1,5 @@
-										# written by Erez Schwartz
-										
-Set-Itemproperty -path HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell -name ExecutionPolicy -value ByPass
+                       # written by Erez Schwartz										
+# Set-Itemproperty -path HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell -name ExecutionPolicy -value ByPass
 
 $ErrorActionPreference = 'SilentlyContinue'
 
@@ -9,7 +8,7 @@ cls
 Write-Host "Set Permissions for Microsoft Teams" # show message on the screen
 write-host "`n" # for creating space
 $Username = Read-Host 'Enter AD User' # prompt user to input value
-$cred = Get-Credential supersol\***adm
+$cred = Get-Credential mydomaim\***adm
 $newou = "OU=Users-Office365,DC=corp,DC=supersol,DC=co,DC=il"
 Set-ADUser -Identity $Username -Replace @{userPrincipalName="$Username@mydomain.com"} # change upn suffix
 $Groups = @("Office365_Lic_Default","Office365_Lic_Teams_Online","Office365 Required MFA")
