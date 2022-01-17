@@ -20,8 +20,8 @@ write-host "`n" # for creating space
 $UserName = Read-Host -Prompt 'Enter Destination UserName'
 $Computer = Read-Host -Prompt 'Enter Hostname\IP Address'
 $AdminGroup = "Administrators"
-$Domain = "corp.supersol.co.il"
-$DomainCredential = Get-Credential "supersol\***adm"
+$Domain = "mydomain"
+$DomainCredential = Get-Credential "mydomain\***adm"
 ([ADSI]"WinNT://$Computer/$AdminGroup,group").psbase.Invoke("Add",([ADSI]"WinNT://$Domain/$UserName").path)
 write-host "`n" # for creating space
 write-output "Operation Complete, wait for logout"
