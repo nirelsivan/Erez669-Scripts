@@ -18,7 +18,9 @@ if ((Check-Admin) -eq $false) {
 $temp =@() --> Collection Variable, it's a composite variable whose internal components, 
 called elements, have the same data type. The value of a collection variable and the values of its elements can change.
 $temp += $OtherVariable
-means that we want to take our current collection and add one more object into it #>
+means that we want to take our current collection and add one more object into it 
+
+#>
 
 Enable-PSRemoting -Force
 $temp = @()
