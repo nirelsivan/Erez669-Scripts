@@ -27,7 +27,7 @@ $temp = @()
 $computers = Get-Content -Path "c:\temp\comp.txt"
 foreach ($computer in $computers) {
 $temp += invoke-command -computername $computer -scriptblock {
-Get-ChildItem C:\temp\* | where {$_.LastWriteTime -ge (Get-Date).AddMonths(-12)} | select name, lastwritetime
+Get-ChildItem c:\retalix\wingpos\Files\Images\CustomerScreen\Backgrounds\* | where {$_.LastWriteTime -ge (Get-Date).AddMonths(-12)} | select name, lastwritetime
 }
 }
 $temp | export-csv c:\temp\check.csv
