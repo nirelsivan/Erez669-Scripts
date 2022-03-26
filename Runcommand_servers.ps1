@@ -1,4 +1,4 @@
-﻿#Variables
+﻿                                                   #Made By Erez Schwartz
 $servers = "D:\temp\Servers.txt"
 $computername = Get-Content $servers
 $sourcefile = "c:\ps\cb8x64.bat"
