@@ -5,7 +5,7 @@ $Computer = Read-Host -Prompt 'Enter Hostname\IP Address'
 $LocalGroup = "Remote Desktop Users"
 $AdminGroup = "Administrators"
 $Domain = "mydomain"
-$DomainCredential = Get-Credential "supersol\***adm"
+$DomainCredential = Get-Credential "mydomain\***adm"
 Set-ADUser -Identity $UserName -company $Computer -Credential $DomainCredential
 ([ADSI]"WinNT://$Computer/$AdminGroup,group").psbase.Invoke("Add",([ADSI]"WinNT://$Domain/$UserName").path)
 ([ADSI]"WinNT://$Computer/$LocalGroup,group").psbase.Invoke("Add",([ADSI]"WinNT://$Domain/$UserName").path)
