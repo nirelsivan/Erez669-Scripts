@@ -27,4 +27,4 @@ $rv
 }
 
 ############ Provide path in get content ##############
-Get-Content "\\10.251.10.251\supergsrv\HdMatte\PowerShell\Computers.txt" | ForEach-Object { Get-ComInfo -computers $_}
+Get-Content "\\myserver\PowerShell\Computers.txt" | ForEach-Object { Get-ComInfo -computers $_}
