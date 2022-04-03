@@ -24,7 +24,7 @@ $Info = Get-ADUser -Identity $User -Properties Title,Department,extensionattribu
 $attribute13 = (Get-ADUser -Identity $User -Properties department).department
 $desc = (Get-ADUser -Identity $User -Properties description).description
 
-New-ADUser -SamAccountName $NewUser -Name $NewName -Description $desc -DisplayName $NewName -GivenName $firstname -Surname $lastname -UserPrincipalName $upn -MobilePhone $mobile -EmployeeID $SapNumber -Instance $Info -Path "OU=Users-Office365,DC=corp,DC=supersol,DC=co,DC=il" -AccountPassword (Read-Host "New Password" -AsSecureString) -ChangePasswordAtLogon 1 -Enabled $true
+New-ADUser -SamAccountName $NewUser -Name $NewName -Description $desc -DisplayName $NewName -GivenName $firstname -Surname $lastname -UserPrincipalName $upn -MobilePhone $mobile -EmployeeID $SapNumber -Instance $Info -Path "OU=Users-Office365,DC=corp,DC=domain,DC=co,DC=il" -AccountPassword (Read-Host "New Password" -AsSecureString) -ChangePasswordAtLogon 1 -Enabled $true
 $Getusergroups = Get-ADUser -Identity $User -Properties memberof | Select-Object -ExpandProperty memberof
 $Getusergroups | Add-ADGroupMember -Members $NewUser -verbose
 write-host "`n" # for creating space
