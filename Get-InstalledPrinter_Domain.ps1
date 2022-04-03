@@ -10,7 +10,7 @@ write-host "Getting Printer Information from Remote Machine"
 write-host "`n" # for creating space
 $Computer = Read-host 'Enter Hostname or IP Address'
 $UserName = read-host 'Enter desired User'
-$domain = Get-Credential supersol\***adm
+$domain = Get-Credential mydomain\***adm
 
 # ---------------------------------------------------------------------------
 #   Part 1: Enable Remote Registry Service
