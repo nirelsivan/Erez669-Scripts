@@ -8,7 +8,7 @@ $2ndNum = $srvName.Substring($srvName.Length -3 ,3)[1]
 $3rdNum = $srvName.Substring($srvName.Length -3 ,3)[2]
 
 $1stvLan = "10.1$1stNum.$2ndNum$3rdNum.0"
-$2dnvLan = "10.11$1stNum.$2ndNum$3rdNum.0"
+$2ndvLan = "10.11$1stNum.$2ndNum$3rdNum.0"
 
 $scopename1 = "Vlan1"
 $startrange1 = "10.1$1stNum.$2ndNum$3rdNum.131"
@@ -29,7 +29,7 @@ Add-DHCPServerv4Scope -StartRange $startrange1 -EndRange $endrange1 -SubnetMask 
 Add-DHCPServerv4Scope -StartRange $startrange2 -EndRange $endrange2 -SubnetMask $subnetmask -Name $scopename2 -State Active
 # Adding Scope Options
 Set-DHCPServerv4OptionValue -Router $router1 -ScopeId $1stvLan
-Set-DHCPServerv4OptionValue -Router $router2 -ScopeId $2dnvLan
+Set-DHCPServerv4OptionValue -Router $router2 -ScopeId $2ndvLan
 Set-DHCPServerv4OptionValue -DnsServer $DNS1, $DNS2 -DnsDomain mydomain.com
 Set-DHCPServerv4OptionValue -Router $router1, $router2
 Add-DhcpServerv4OptionDefinition -ComputerName $srvName -Name PXEClient -Description "PXE Support" -OptionId 060 -Type String
