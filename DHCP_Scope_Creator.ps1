@@ -30,7 +30,7 @@ Add-DHCPServerv4Scope -StartRange $startrange2 -EndRange $endrange2 -SubnetMask 
 # Adding Scope Options
 Set-DHCPServerv4OptionValue -Router $router1 -ScopeId $1stvLan
 Set-DHCPServerv4OptionValue -Router $router2 -ScopeId $2dnvLan
-Set-DHCPServerv4OptionValue -DnsServer $DNS1, $DNS2 -DnsDomain posprod.supersol.co.il
+Set-DHCPServerv4OptionValue -DnsServer $DNS1, $DNS2 -DnsDomain mydomain.com
 Set-DHCPServerv4OptionValue -Router $router1, $router2
 Add-DhcpServerv4OptionDefinition -ComputerName $srvName -Name PXEClient -Description "PXE Support" -OptionId 060 -Type String
 Set-DhcpServerv4OptionValue -ComputerName $srvName -OptionId 060 -Value "PXEClient"
