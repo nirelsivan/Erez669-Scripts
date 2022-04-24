@@ -1,4 +1,6 @@
-﻿Install-WindowsFeature -Name 'DHCP' –IncludeManagementTools
+          # Created By Erez Schwartz
+
+Install-WindowsFeature -Name 'DHCP' –IncludeManagementTools
 # dhcp scope variables
 $srvName = [System.Net.Dns]::GetHostName()
 $1stNum = $srvName.Substring($srvName.Length -3 ,3)[0]
