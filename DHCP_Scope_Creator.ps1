@@ -1,4 +1,4 @@
-          # Created By Erez Schwartz
+          # Created By Erez Schwartz and David SanKovsky (from facebook)
 
 Install-WindowsFeature -Name 'DHCP' –IncludeManagementTools
 # dhcp scope variables
