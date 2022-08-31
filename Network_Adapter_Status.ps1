@@ -1,4 +1,4 @@
-﻿        # written by Elik and ErezSc
+      # written by Elik and ErezSc
 
 $ErrorActionPreference = 'SilentlyContinue'
 
