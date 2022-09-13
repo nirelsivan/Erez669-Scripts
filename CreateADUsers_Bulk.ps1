@@ -1,4 +1,4 @@
-		#written by Erez Schwartz
+		# written by Erez Schwartz
 
 # Import active directory module for running AD cmdlets
 Import-Module activedirectory
