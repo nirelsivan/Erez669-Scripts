@@ -1,4 +1,4 @@
-﻿        # written by Eli Kastika
+                        # written by Eli Kastika and Erez Schwartz
 
 $name = Get-NetAdapter | ? status -ne  up | Select-Object -ExpandProperty "name" -Unique
 $name1 = Get-NetAdapter | ? status -eq up | Select-Object -ExpandProperty "name" -Unique 
