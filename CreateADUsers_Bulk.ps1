@@ -3,7 +3,7 @@
 # Import active directory module for running AD cmdlets
 Import-Module activedirectory
   
-#Store the data from ADUsers.csv in the $ADUsers variable
+#Store the data from NewUsers.csv in the $ADUsers variable
 $ADUsers = Import-csv C:\PowerShell\NewUsers.csv
 
 #Loop through each row containing user details in the CSV file 
