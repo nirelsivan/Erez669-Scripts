@@ -57,7 +57,7 @@ foreach ($User in $ADUsers)
             -EmailAddress $email `
             -Title $jobtitle `
             -Department $department `
-            -AccountPassword (convertto-securestring $Password -AsPlainText -Force) -ChangePasswordAtLogon $True
+            -AccountPassword (convertto-securestring $Password -AsPlainText -Force) -ChangePasswordAtLogon $False
             $Groups = @("CTX_Basic_Apps_64","VDI-10")
             ForEach ($Group in $Groups) {Add-ADPrincipalGroupMembership $Username -MemberOf $Group}
 	}
