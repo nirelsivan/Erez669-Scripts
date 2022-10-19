@@ -15,14 +15,13 @@ $3rdNum = $srvName.Substring($srvName.Length -3 ,3)[2]
 
 if ($2ndNum -eq '0') {
 $Check1 = Test-Connection 10.11$1stNum.$3rdNum.9 -Quiet -Count 5 
-
 $check2 = Test-Connection 10.11$1stNum.$3rdNum.8 -Quiet -Count 5 
 }
+
 else
+
 {
-
 $Check1 = Test-Connection 10.11$1stNum.$2ndNum$3rdNum.9 -Quiet -Count 5 
-
 $check2 = Test-Connection 10.11$1stNum.$2ndNum$3rdNum.8 -Quiet -Count 5 
 }
 
