@@ -46,10 +46,11 @@ $DNS2 = "10.250.207.151"
 # Creating scopes
 Add-DHCPServerv4Scope -StartRange $startrange1 -EndRange $endrange1 -SubnetMask $subnetmask -Name $scopename1 -State Active
 Add-DHCPServerv4Scope -StartRange $startrange2 -EndRange $endrange2 -SubnetMask $subnetmask -Name $scopename2 -State Active
+
 # Adding Scope Options
 Set-DHCPServerv4OptionValue -Router $router1 -ScopeId $1stvLan
 Set-DHCPServerv4OptionValue -Router $router2 -ScopeId $2ndvLan
-Set-DHCPServerv4OptionValue -DnsServer $DNS1, $DNS2 -DnsDomain posprod.supersol.co.il
+Set-DHCPServerv4OptionValue -DnsServer $DNS1, $DNS2 -DnsDomain mydomain.co.il
 Set-DHCPServerv4OptionValue -Router $router1, $router2
 Add-DhcpServerv4OptionDefinition -ComputerName $srvName -Name PXEClient -Description "PXE Support" -OptionId 060 -Type String
 Set-DhcpServerv4OptionValue -ComputerName $srvName -OptionId 060 -Value "PXEClient"
