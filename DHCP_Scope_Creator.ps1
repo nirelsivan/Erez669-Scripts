@@ -31,6 +31,7 @@ $DNS2 = "10.250.207.151"
 # Creating scopes
 Add-DHCPServerv4Scope -StartRange $startrange1 -EndRange $endrange1 -SubnetMask $subnetmask -Name $scopename1 -State Active
 Add-DHCPServerv4Scope -StartRange $startrange2 -EndRange $endrange2 -SubnetMask $subnetmask -Name $scopename2 -State Active
+
 # Adding Scope Options
 Set-DHCPServerv4OptionValue -Router $router1 -ScopeId $1stvLan
 Set-DHCPServerv4OptionValue -Router $router2 -ScopeId $2ndvLan
