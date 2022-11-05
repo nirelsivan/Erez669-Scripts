@@ -11,7 +11,7 @@ foreach($comp in $complist){
          write-host $comp is online
          $OutputMessage += ("$comp is online")
      }
-     else{
+    else{
          write-host $comp is not reachable
          $OutputMessage += ("$comp is not reachable")
      }
