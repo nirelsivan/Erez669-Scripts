@@ -1,4 +1,4 @@
-﻿$complist = gc "\\10.251.10.251\supergsrv\HdMatte\PowerShell\Servers.txt"
+﻿$complist = gc "\\myserver\PowerShell\Servers.txt"
 $Results = "c:\temp\Results.txt"
 
 $OutputMessage = @()
