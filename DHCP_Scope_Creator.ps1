@@ -1,5 +1,6 @@
                                         # Created By Erez Schwartz
 
+$ErrorActionPreference = 'SilentlyContinue'
 Install-WindowsFeature -Name 'DHCP' –IncludeManagementTools
 
 # dhcp scope variables
