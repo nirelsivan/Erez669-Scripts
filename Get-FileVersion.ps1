@@ -1,4 +1,4 @@
-﻿clear
+clear
 $servers = get-content c:\temp\PC.txt
 $file = 'c:\temp\test.csv'
 
