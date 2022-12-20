@@ -1,4 +1,4 @@
-﻿If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 
 {   
 $arguments = "& '" + $myinvocation.mycommand.definition + "'"
@@ -17,4 +17,5 @@ $Daysback = "-30"
 $CurrentDate = Get-Date
 $excluded = @("killtask.jpg , LogViewer.lnk")
 $DatetoDelete = $CurrentDate.AddDays($Daysback)
-Get-ChildItem * -Recurse -Exclude $excluded | Where-Object { "$_.LastWriteTime -lt $DatetoDelete" } | Remove-Item -Recurse -Verbose -Force -Exclude $excluded -ErrorAction SilentlyContinue
+Get-ChildItem * -Recurse -Exclude $excluded -Verbose | Where-Object { "$_.LastWriteTime -lt $DatetoDelete" } | Remove-Item -Recurse -Verbose -Force -Exclude $excluded
+rm -r -fo d:\ -Exclude $excluded
