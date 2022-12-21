@@ -6,13 +6,26 @@ Start-Process powershell -Verb runAs -ArgumentList $arguments
 Break
 }
 
-<# you must enable LongPath DWORD in registry on path
-
-"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" in order to use this script #>
-
 clear
 
-Set-Location d:\
+Set-Location D:\
+
+$Folder = "D:\"
 $excluded = @("killtask.jpg , LogViewer.lnk")
-Get-ChildItem * -Recurse -Force -Verbose -Exclude $excluded | Where-Object {($_.LastWriteTime -lt (Get-Date).AddDays(-30)) -and (($_.Type -eq "file"))} | Remove-Item -Exclude $excluded -Force -Verbose
-Remove-Item -Exclude $excluded -Force -Verbose | Where-Object {($_.Type -eq "folder")}
+
+#Delete files older than 1 month
+Get-ChildItem $Folder -Recurse -Force -ea 0 |
+? {!$_.PsIsContainer -and $_.LastWriteTime -lt (Get-Date).AddDays(-30)} |
+ForEach-Object {
+   $_ | del -Exclude $excluded -Recurse -Force -Verbose
+   $_.FullName | Out-File C:\Temp\deletedlog.txt -Append
+}
+
+#Delete empty folders and subfolders
+Get-ChildItem $Folder -Recurse -Force -ea 0 |
+? {$_.PsIsContainer -eq $True} |
+? {$_.getfiles().count -eq 0} |
+ForEach-Object {
+    $_ | del -Force -Recurse -Verbose
+    $_.FullName | Out-File C:\Temp\deletedlog.txt -Append
+}
