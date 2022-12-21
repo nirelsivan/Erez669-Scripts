@@ -13,9 +13,6 @@ Break
 clear
 
 Set-Location d:\
-$Daysback = -30
-$CurrentDate = Get-Date
 $excluded = @("killtask.jpg , LogViewer.lnk")
-$DatetoDelete = $CurrentDate.AddDays($Daysback)
-Get-ChildItem * -Recurse -Exclude $excluded -Verbose | Where-Object { $_.LastWriteTime -lt $DatetoDelete } | Remove-Item -Verbose -Recurse -Force -Exclude $excluded
-Remove-Item -LiteralPath d:\ -Verbose -Recurse -Force -Exclude $excluded | Where-Object { $_.LastWriteTime -lt $DatetoDelete }
+Get-ChildItem * -Recurse -Force -Verbose -Exclude $excluded | Where-Object {($_.LastWriteTime -lt (Get-Date).AddDays(-30)) -and (($_.Type -eq "file"))} | Remove-Item -Exclude $excluded -Force -Verbose
+Remove-Item -Exclude $excluded -Force -Verbose | Where-Object {($_.Type -eq "folder")}
