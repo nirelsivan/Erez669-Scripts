@@ -6,9 +6,12 @@ Start-Process powershell -Verb runAs -ArgumentList $arguments
 Break
 }
 
-clear
+<# you must enable LongPath DWORD in registry on path
 
-Set-Location D:\
+"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" in order to use this script #>
+
+clear
+Set-Location d:\
 
 $Folder = "D:\"
 $excluded = @("killtask.jpg , LogViewer.lnk")
