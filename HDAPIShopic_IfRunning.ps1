@@ -1,18 +1,3 @@
-﻿<# If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
-
-{   
-$arguments = "& '" + $myinvocation.mycommand.definition + "'"
-Start-Process powershell -Verb runAs -ArgumentList $arguments
-Break
-}
-
-$serviceName = 'HDAPIShopic'
-$service = Get-Service -Name $serviceName | Where-Object {$_.Status -eq "Stopped"}
-Start-Service -InputObject $service -Verbose
-Start-Sleep 07
-
-#>
-
 If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {  
     $arguments = "& '" + $myinvocation.mycommand.definition + "'"
