@@ -1,4 +1,4 @@
-$computerName = $env:COMPUTERNAME
+$computername = $env:COMPUTERNAME
 $name = ($computername -split '-')[1]
 $path = 'c:\Program Files (x86)\Retalix\SCO.NET\App\sco.exe.config'
 $value = 'posnlb'
