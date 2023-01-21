@@ -1,7 +1,14 @@
-$name = $env:COMPUTERNAME.Substring(4,3)
+$computerName = $env:COMPUTERNAME
+$name = ($computername -split '-')[1]
 $path = 'c:\Program Files (x86)\Retalix\SCO.NET\App\sco.exe.config'
 $value = 'posnlb'
 $replacement = "$value$name"
-$text = Get-Content $path
+$text = [System.IO.File]::ReadAllText($path)
+
+if ($text -match 'plpossrv') {
+$text = $text -replace '<URL>http://plpossrv(.*?).posprod.supersol.co.il:4444/wsgpos/Service.asmx</URL>', "<URL>http://plpossrv$name.posprod.supersol.co.il:4444/wsgpos/Service.asmx</URL>"
+} else {
 $text = $text -replace '<URL>http://posnlb(.*?).posprod.supersol.co.il:4444/wsgpos/Service.asmx</URL>', "<URL>http://$replacement.posprod.supersol.co.il:4444/wsgpos/Service.asmx</URL>"
-$text | Set-Content $path
+}
+
+[System.IO.File]::WriteAllText($path, $text)
