@@ -2,7 +2,7 @@ Import-Module activedirectory
 
 while ($true) {
     clear
-    $userList = Read-Host 'Enter a comma-separated list of user names (for example apple,banana,tomato)'
+    $userList = Read-Host 'Enter a comma-separated list of users (for example apple,banana,tomato)'
     $userArray = $userList.Split(',')
     $branchNumber = Read-Host 'Enter branch number'
     $groupName = "Branch_$branchNumber"
