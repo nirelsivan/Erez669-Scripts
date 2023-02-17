@@ -1,47 +1,46 @@
 # Local and Remote System Information v3
 # Shows details of currently running PC
-# Thom McKiernan 11/09/2014 and modified by Erez Schwartz
+# Thom McKiernan 11/09/2014 and modified by Erez Schwartz 17/02/2023
 
 while ($true)
 {
-$ErrorActionPreference = 'SilentlyContinue'
-write-host "`n" # for creating space
-write-host "Get Computer Hardware Information"
-write-host "`n" # for creating space
-$enterPC = read-host "enter Computername or IP Address"
-$computerSystem = Get-CimInstance CIM_ComputerSystem –ComputerName $enterPC
-$computerBIOS = Get-CimInstance CIM_BIOSElement –ComputerName $enterPC
-$computerOS = Get-CimInstance CIM_OperatingSystem –ComputerName $enterPC
-$computerCPU = Get-CimInstance CIM_Processor –ComputerName $enterPC
-$computerHDD = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID = 'C:'" –ComputerName $enterPC
-$DiskType = Get-PhysicalDisk -CimSession $enterPC | select mediatype
+    $ErrorActionPreference = 'SilentlyContinue'
+    Write-Host "`n" # for creating space
+    Write-Host "Get Computer Hardware Information"
+    Write-Host "`n" # for creating space
+    $enterPC = Read-Host "Enter Computername or IP Address"
+    $computerSystem = Get-WmiObject -Class Win32_ComputerSystem â€“ComputerName $enterPC
+    $computerBIOS = Get-WmiObject -Class Win32_BIOS â€“ComputerName $enterPC
+    $computerOS = Get-WmiObject -Class Win32_OperatingSystem â€“ComputerName $enterPC
+    $computerCPU = Get-WmiObject -Class Win32_Processor â€“ComputerName $enterPC
+    $computerHDD = Get-WmiObject -Class Win32_LogicalDisk -ComputerName $enterPC -Filter "DeviceID = 'C:'"
+    $diskType = (Get-PhysicalDisk -CimSession $enterPC | Select-Object MediaType).MediaType
 
-# ---------------------------------------------------------------------------
-#   					Enable Remote Registry Service
-# ---------------------------------------------------------------------------
+    Clear-Host
+    Write-Host "System Information for: " $computerSystem.Name -BackgroundColor DarkCyan
+    "Manufacturer: " + $computerSystem.Manufacturer
+    "Model: " + $computerSystem.Model
+    "Serial Number: " + $computerBIOS.SerialNumber
+    "CPU: " + $computerCPU.Name
+    "HDD Capacity: "  + "{0:N2}" -f ($computerHDD.Size/1GB) + "GB"
+    "HDD Type: " + $diskType
+    "HDD Space: " + "{0:P2}" -f ($computerHDD.FreeSpace/$computerHDD.Size) + " Free (" + "{0:N2}" -f ($computerHDD.FreeSpace/1GB) + "GB)"
+    "RAM: " + "{0:N2}" -f ($computerSystem.TotalPhysicalMemory/1GB) + "GB"
+    "Operating System: " + $computerOS.caption
+    Reg Query "\\$enterPC\HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId
+    Write-Host "`n" # for creating space
+    Write-Host "Original Install Date"
+    Write-Host "`n" # for creating space
+    ([WMI] "").ConvertToDateTime(((Get-WmiObject -class win32_operatingsystem -ComputerName $enterPC).installdate))
+    Write-Host "`n" # for creating space
+    "User logged In: " + $computerSystem.UserName
+    $LastBoot = Get-WmiObject -Class Win32_OperatingSystem â€“ComputerName $enterPC
+if ($LastBoot -ne $null) {
+    $lastBootTime = $LastBoot.ConvertToDateTime($LastBoot.LastBootUpTime)
+    Write-Host "Last Reboot: $lastBootTime"
+}
+else {
+    Write-Host "Unable to retrieve last boot time."
+}
 
-$Service = "RemoteRegistry"
-$RemoteRegistry = Get-CimInstance -Class Win32_Service -ComputerName $enterPC -Filter 'Name = "$Service"'
-Set-Service -Name $Service -ComputerName $enterPC -StartupType Automatic
-Start-Service -InputObject (Get-Service -Name $Service -ComputerName $enterPC)
-
-Clear-Host
-
-Write-Host "System Information for: " $computerSystem.Name -BackgroundColor DarkCyan
-"Manufacturer: " + $computerSystem.Manufacturer
-"Model: " + $computerSystem.Model
-"Serial Number: " + $computerBIOS.SerialNumber
-"CPU: " + $computerCPU.Name
-"HDD Capacity: "  + "{0:N2}" -f ($computerHDD.Size/1GB) + "GB" + "$DiskType"
-"HDD Space: " + "{0:P2}" -f ($computerHDD.FreeSpace/$computerHDD.Size) + " Free (" + "{0:N2}" -f ($computerHDD.FreeSpace/1GB) + "GB)"
-"RAM: " + "{0:N2}" -f ($computerSystem.TotalPhysicalMemory/1GB) + "GB"
-"Operating System: " + $computerOS.caption
-Reg Query "\\$enterPC\HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId
-write-host "`n" # for creating space
-write-host "Original Install Date"
-write-host "`n" # for creating space
-([WMI] "").ConvertToDateTime(((Get-WmiObject -class win32_operatingsystem -ComputerName $enterPC).installdate))
-write-host "`n" # for creating space
-"User logged In: " + $computerSystem.UserName
-"Last Reboot: " + $computerOS.LastBootUpTime
 }
