@@ -1,6 +1,6 @@
-# Local and Remote System Information v3
+# Local and Remote System Information v4
 # Shows details of currently running PC
-# Thom McKiernan 11/09/2014 and modified by Erez Schwartz 17/02/2023
+# Written by Thom McKiernan 11/09/2014 and modified by Erez Schwartz 17/02/2023
 
 while ($true)
 {
