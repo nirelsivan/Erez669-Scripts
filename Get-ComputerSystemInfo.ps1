@@ -1,6 +1,6 @@
 # Local and Remote System Information v4
 # Shows details of currently running PC
-# Written by Thom McKiernan 11/09/2014 and modified by Erez Schwartz 17/02/2023
+# written by Erez Schwartz 17.2.23
 
 while ($true)
 {
@@ -16,7 +16,17 @@ while ($true)
     $computerHDD = Get-WmiObject -Class Win32_LogicalDisk -ComputerName $enterPC -Filter "DeviceID = 'C:'"
     $diskType = (Get-PhysicalDisk -CimSession $enterPC | Select-Object MediaType).MediaType
 
-    Clear-Host
+    # ---------------------------------------------------------------------------
+    #   					Enable Remote Registry Service
+    # ---------------------------------------------------------------------------
+
+$Service = "RemoteRegistry"
+$RemoteRegistry = Get-CimInstance -Class Win32_Service -ComputerName $enterPC -Filter "Name = '$Service'"
+Set-Service -Name $Service -ComputerName $enterPC -StartupType Automatic
+Start-Service -InputObject (Get-Service -Name $Service -ComputerName $enterPC)
+
+Clear-Host
+    
     Write-Host "System Information for: " $computerSystem.Name -BackgroundColor DarkCyan
     "Manufacturer: " + $computerSystem.Manufacturer
     "Model: " + $computerSystem.Model
