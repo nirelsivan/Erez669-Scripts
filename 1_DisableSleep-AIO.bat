@@ -1,3 +1,7 @@
+#nirel - bla bla bla
+ 
+
+
 @echo off
 echo Disabling all Sleep Parameters
 pushd "%~dp0"
