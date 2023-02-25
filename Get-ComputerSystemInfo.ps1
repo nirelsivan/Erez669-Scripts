@@ -38,6 +38,7 @@ while ($true)
     "RAM: " + "{0:N2}" -f ($computerSystem.TotalPhysicalMemory/1GB) + "GB"
     "Operating System: " + $computerOS.caption
     Reg Query "\\$enterPC\HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId
+    Reg Query "\\$enterPC\HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v DisplayVersion
     Write-Host "`n" # for creating space
     Write-Host "Original Install Date"
     Write-Host "`n" # for creating space
