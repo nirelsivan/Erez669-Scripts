@@ -20,12 +20,12 @@ while ($true)
     #   					Enable Remote Registry Service
     # ---------------------------------------------------------------------------
 
-$Service = "RemoteRegistry"
-$RemoteRegistry = Get-CimInstance -Class Win32_Service -ComputerName $enterPC -Filter "Name = '$Service'"
-Set-Service -Name $Service -ComputerName $enterPC -StartupType Automatic
-Start-Service -InputObject (Get-Service -Name $Service -ComputerName $enterPC)
+    $Service = "RemoteRegistry"
+    $RemoteRegistry = Get-CimInstance -Class Win32_Service -ComputerName $enterPC -Filter "Name = '$Service'"
+    Set-Service -Name $Service -ComputerName $enterPC -StartupType Automatic
+    Start-Service -InputObject (Get-Service -Name $Service -ComputerName $enterPC)
 
-Clear-Host
+    Clear-Host
     
     Write-Host "System Information for: " $computerSystem.Name -BackgroundColor DarkCyan
     "Manufacturer: " + $computerSystem.Manufacturer
