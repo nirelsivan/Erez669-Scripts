@@ -100,7 +100,7 @@ Set-ADUser -Identity $NewUser -replace @{extensionAttribute13 = "$attribute13"}
 # Create HomeDrive for the new account
 $homeShare = "\\fileserv01\data\$NewUser"
 $driveLetter = "V:"
-$detect = "supersol"
+$detect = "mydomain"
 New-Item $homeShare -Type Directory -Force
 
 Set-ADUser -Identity $NewUser -HomeDrive $driveLetter -HomeDirectory $homeShare
