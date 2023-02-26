@@ -45,6 +45,7 @@ while ($true)
     ([WMI] "").ConvertToDateTime(((Get-WmiObject -class win32_operatingsystem -ComputerName $enterPC).installdate))
     Write-Host "`n" # for creating space
     Write-Host User Logged On: $computerSystem.UserName
+    Write-Host "`n" # for creating space
     $LastBoot = Get-WmiObject -Class Win32_OperatingSystem –ComputerName $enterPC
 if ($LastBoot -ne $null) {
     $lastBootTime = $LastBoot.ConvertToDateTime($LastBoot.LastBootUpTime)
