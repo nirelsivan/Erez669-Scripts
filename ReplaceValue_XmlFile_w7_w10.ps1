@@ -1,4 +1,4 @@
-﻿$computername = $env:COMPUTERNAME
+$computername = $env:COMPUTERNAME
 $name = ($computername -split '-')[1]
 $paths = @('c:\retalix\wingpos\GroceryWinPos.exe.config', 'c:\program files\Retalix\SCO.NET\App\sco.exe.config', 'c:\Program Files (x86)\Retalix\SCO.NET\App\sco.exe.config')
 $value = 'posnlb'
